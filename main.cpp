@@ -16,6 +16,7 @@
 #include "Hand.h"
 #include <string>
 #include <map>
+#include <set>
 
 
 using namespace std;
@@ -44,7 +45,10 @@ int main(int argc, char** argv) {
         
         cin>> response ; 
         
-        while(response!='b' && response!='w' )
+        
+        set<char> validResponses ={'b', 'w'}; 
+        
+        while(validResponses.find(response) == validResponses.end()) // not a valid response
         {
             cout<<"Not a valid response try again"<<endl; 
             cin>> response ; 
@@ -99,6 +103,10 @@ void playBlackJack(){
     {
         cout<<endl<<endl<<"ROUND START, SHUFFLING CARDS..."<<endl ;
         Deck deck; 
+        
+        deck.printDeck(); 
+        
+        
         
         // a hand is going to be a queue for both the computer and the player 
         // deal cards between both the player and the computer until the deck is empty 

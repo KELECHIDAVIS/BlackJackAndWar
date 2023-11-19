@@ -16,6 +16,7 @@
 #include <iostream>
 #include <stack>
 #include <algorithm>
+#include <list>
 
 using namespace std; 
 class Deck {
@@ -24,12 +25,17 @@ class Deck {
     
     // these make it so i don't have to have if statements when printing 
     string cardNumNames[13] = {"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
-    char suitNames[4] = {'H','C','D','S'} ; 
+    list<char> suitNames; // holds the first letter of the suit Names for reference 
 public :
     
     Deck(){
         // a deck has 52 cards, 4 suit x 13 cards per suit
         
+        suitNames.push_back('H');
+        suitNames.push_back('C');
+        suitNames.push_back('D');
+        suitNames.push_back('S');
+
         for(int i = 0 ; i<4; i++)
         {
             for(int j =1; j<=13; j++)
@@ -119,7 +125,13 @@ public :
     
     void printCard(Card* card)
     {
-        cout<<cardNumNames[card->num-1]<<suitNames[card->suit]<<"  "; 
+        list<char>::iterator it = suitNames.begin();
+        
+        for(int i=0; i<card->suit; i++){
+            ++it;
+        }
+        
+        cout<<cardNumNames[card->num-1]<<*it<<"  "; 
     }
     
         
